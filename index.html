@@ -3,762 +3,452 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Хребет Нації | Офіційний сайт</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <title>ДСР НПУ | Офіційний портал</title>
     <style>
+        /* --- ОСНОВНІ НАЛАШТУВАННЯ --- */
         :root {
-            --primary: #0057B7;
-            --secondary: #FFD700;
-            --dark: #1A1A1A;
-            --light: #F8F9FA;
-            --gray: #6C757D;
-            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --primary-color: #0f172a; /* Темно-синій фон */
+            --accent-gold: #fbbf24;   /* Золотий акцент */
+            --accent-blue: #38bdf8;   /* Блакитний акцент */
+            --text-color: #f8fafc;    /* Білий текст */
+            --glass-bg: rgba(30, 41, 59, 0.7); /* Ефект скла */
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: var(--light);
-            color: var(--dark);
-            line-height: 1.6;
+            background-color: var(--primary-color);
+            color: var(--text-color);
             overflow-x: hidden;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header */
-        header {
-            background: linear-gradient(135deg, var(--primary) 0%, #003D82 100%);
+        /* --- ПОПЕРЕДЖЕННЯ (DISCLAIMER) --- */
+        .disclaimer-bar {
+            background: #ef4444; /* Червоний */
             color: white;
-            padding: 1rem 0;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            padding: 8px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            z-index: 1000;
             position: relative;
-            z-index: 100; /* Додано z-index */
         }
 
-        header::before {
-            content: "";
-            position: absolute;
+        /* --- НАВІГАЦІЯ --- */
+        nav {
+            position: sticky;
             top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="rgba(255,255,255,0.05)" d="M0,0 L100,0 L100,100 L0,100 Z" /></svg>');
-            background-size: cover;
-            opacity: 0.1;
-        }
-
-        .header-content {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: relative;
+            padding: 15px 50px;
+            z-index: 999;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            animation: slideDown 0.8s ease;
         }
 
         .logo {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
-        .logo-text {
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-blue);
+        }
+
+        /* --- ГОЛОВНИЙ ЕКРАН (HERO) --- */
+        .hero {
+            height: 90vh;
             display: flex;
             flex-direction: column;
-        }
-
-        .logo-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: white;
-            line-height: 1;
-        }
-
-        .logo-subtitle {
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.8);
-            margin-top: 0.3rem;
-        }
-
-        /* Оновлена навігація */
-        nav {
-            display: flex;
-            gap: 0.5rem;
-            position: relative;
-        }
-
-        .nav-item {
-            position: relative;
-        }
-
-        .nav-link {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            padding: 0.5rem 1rem;
-            position: relative;
-            transition: var(--transition);
-            display: flex;
+            justify-content: center;
             align-items: center;
-            white-space: nowrap;
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 1rem;
-            width: calc(100% - 2rem);
-            height: 2px;
-            background-color: var(--secondary);
-            transform: scaleX(0);
-            transition: var(--transition);
-            transform-origin: bottom right;
-        }
-
-        .nav-link:hover::after {
-            transform: scaleX(1);
-            transform-origin: bottom left;
-        }
-
-        .nav-link:hover {
-            color: var(--secondary);
-        }
-
-        .dropdown-menu {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background-color: white;
-            min-width: 220px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-            border-radius: 4px;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(10px);
-            transition: var(--transition);
-            z-index: 110; /* Вищий ніж у шапки */
-        }
-
-        .nav-item:hover .dropdown-menu {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .dropdown-menu a {
-            color: var(--dark);
-            padding: 0.75rem 1.5rem;
-            text-decoration: none;
-            display: block;
-            transition: var(--transition);
-            border-left: 3px solid transparent;
-        }
-
-        .dropdown-menu a:hover {
-            background-color: rgba(0, 87, 183, 0.05);
-            color: var(--primary);
-            border-left: 3px solid var(--secondary);
-        }
-
-        .dropdown-arrow {
-            margin-left: 5px;
-            transition: var(--transition);
-            font-size: 0.8em;
-        }
-
-        .nav-item:hover .dropdown-arrow {
-            transform: rotate(180deg);
-        }
-
-        @media (max-width: 768px) {
-            nav {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 0.3rem;
-            }
-            .nav-link {
-                padding: 0.5rem 0.7rem;
-                font-size: 0.9rem;
-            }
-        }
-
-        /* Решта стилів залишаються без змін */
-        /* Hero */
-        .hero {
-            padding: 4rem 0;
             text-align: center;
-            background: url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center;
-            background-size: cover;
+            background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
             position: relative;
-            color: white;
-            margin-top: 0; /* Додано для уникнення зсуву */
+            overflow: hidden;
         }
 
+        /* Декоративні елементи фону */
         .hero::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 87, 183, 0.8);
+            width: 200%;
+            height: 200%;
+            background: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+            opacity: 0.05;
+            animation: rotateBg 60s linear infinite;
         }
 
-        .hero-content {
-            position: relative;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 20px;
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #fff, var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInUp 1s ease;
         }
 
-        .hero-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-            animation: fadeInUp 1s ease-out;
-        }
-
-        .hero-subtitle {
+        .hero p {
             font-size: 1.2rem;
-            margin-bottom: 2rem;
-            opacity: 0;
-            animation: fadeInUp 1s ease-out 0.3s forwards;
+            color: #94a3b8;
+            margin-bottom: 40px;
+            max-width: 600px;
+            animation: fadeInUp 1.2s ease;
         }
 
-        .btn {
-            display: inline-block;
-            padding: 0.8rem 2rem;
+        /* КНОПКА "ЗВЕРНУТИСЬ" */
+        .cta-btn {
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            background: var(--accent-gold);
+            border: none;
             border-radius: 50px;
+            cursor: pointer;
             text-decoration: none;
-            font-weight: 600;
-            transition: var(--transition);
-            margin: 0 0.5rem;
-            opacity: 0;
-            animation: fadeInUp 1s ease-out 0.6s forwards;
+            box-shadow: 0 0 20px rgba(251, 191, 36, 0.4);
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
         }
 
-        .btn-primary {
-            background-color: var(--secondary);
-            color: var(--dark);
+        .cta-btn:hover {
+            transform: scale(1.05);
+            background: #fff;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.6);
         }
 
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn-outline {
-            background-color: transparent;
-            border: 2px solid var(--secondary);
-            color: var(--secondary);
-        }
-
-        .btn-outline:hover {
-            background-color: rgba(255, 215, 0, 0.1);
-        }
-
-        /* Sections */
-        .section {
-            padding: 4rem 0;
+        /* --- СЕКЦІЇ --- */
+        section {
+            padding: 80px 50px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
         .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
             text-align: center;
-            margin-bottom: 3rem;
-            color: var(--primary);
+            color: var(--text-color);
+            text-transform: uppercase;
+            letter-spacing: 3px;
             position: relative;
         }
-
+        
         .section-title::after {
             content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
+            display: block;
+            width: 100px;
             height: 3px;
-            background-color: var(--secondary);
+            background: var(--accent-blue);
+            margin: 15px auto;
         }
 
-        /* News */
+        /* НОВИНИ */
         .news-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
         }
 
         .news-card {
-            background-color: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: var(--transition);
-            opacity: 0;
+            background: var(--glass-bg);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: transform 0.3s;
+            opacity: 0; /* Для анімації JS */
             transform: translateY(20px);
         }
 
-        .news-card:nth-child(1) {
-            animation: fadeInUp 0.6s ease-out 0.2s forwards;
-        }
-        .news-card:nth-child(2) {
-            animation: fadeInUp 0.6s ease-out 0.4s forwards;
-        }
-        .news-card:nth-child(3) {
-            animation: fadeInUp 0.6s ease-out 0.6s forwards;
+        .news-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.6s ease-out;
         }
 
         .news-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .news-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-
-        .news-content {
-            padding: 1.5rem;
+            border-color: var(--accent-gold);
         }
 
         .news-date {
+            color: var(--accent-blue);
             font-size: 0.8rem;
-            color: var(--gray);
-            margin-bottom: 0.5rem;
+            margin-bottom: 10px;
         }
 
-        .news-title {
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-            color: var(--primary);
+        /* РОЗШУК */
+        .wanted-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
         }
 
-        .news-excerpt {
-            color: var(--gray);
-            margin-bottom: 1.5rem;
-        }
-
-        .read-more {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            transition: var(--transition);
-        }
-
-        .read-more:hover {
-            color: var(--secondary);
-        }
-
-        .read-more::after {
-            content: '→';
-            margin-left: 5px;
-            transition: var(--transition);
-        }
-
-        .read-more:hover::after {
-            transform: translateX(3px);
-        }
-
-        /* Team */
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .team-card {
-            background-color: white;
+        .wanted-card {
+            width: 250px;
+            background: #2a0a0a; /* Темно-червоний відтінок */
+            border: 2px solid #ef4444;
+            padding: 15px;
+            text-align: center;
             border-radius: 8px;
-            padding: 1.5rem;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: var(--transition);
-            opacity: 0;
-            transform: translateY(20px);
-        }
-
-        .team-card:nth-child(1) { animation: fadeInUp 0.6s ease-out 0.2s forwards; }
-        .team-card:nth-child(2) { animation: fadeInUp 0.6s ease-out 0.3s forwards; }
-        .team-card:nth-child(3) { animation: fadeInUp 0.6s ease-out 0.4s forwards; }
-        .team-card:nth-child(4) { animation: fadeInUp 0.6s ease-out 0.5s forwards; }
-
-        .team-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .team-image {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin: 0 auto 1rem;
-            border: 3px solid var(--secondary);
-        }
-
-        .team-name {
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--primary);
-        }
-
-        .team-position {
-            color: var(--gray);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
-        .team-contact {
-            font-size: 0.8rem;
-            color: var(--gray);
-        }
-
-        /* Join */
-        .join-section {
-            background-color: var(--primary);
-            color: white;
-            text-align: center;
-            padding: 4rem 0;
-        }
-
-        .join-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .join-text {
-            max-width: 700px;
-            margin: 0 auto 2rem;
-        }
-
-        /* Footer */
-        footer {
-            background-color: var(--dark);
-            color: white;
-            padding: 3rem 0 1.5rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-column h3 {
-            font-size: 1.2rem;
-            margin-bottom: 1.5rem;
             position: relative;
-            padding-bottom: 0.5rem;
+        }
+        
+        .wanted-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            filter: grayscale(100%);
+            margin-bottom: 10px;
         }
 
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background-color: var(--secondary);
+        .wanted-card h3 {
+            color: #ef4444;
+            text-transform: uppercase;
         }
 
-        .footer-links {
+        /* ЗАРПЛАТА ТА СТРУКТУРА */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        
+        .info-text h3 {
+            color: var(--accent-gold);
+            margin-bottom: 15px;
+        }
+
+        .info-text ul {
             list-style: none;
         }
-
-        .footer-link {
-            margin-bottom: 0.8rem;
+        
+        .info-text li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .info-text li::before {
+            content: '➤';
+            color: var(--accent-blue);
+            position: absolute;
+            left: 0;
         }
 
-        .footer-link a {
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .footer-link a:hover {
-            color: var(--secondary);
-            padding-left: 5px;
-        }
-
-        .footer-bottom {
+        /* --- ФУТЕР --- */
+        footer {
+            background: #000;
+            padding: 40px;
             text-align: center;
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #64748b;
             font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.6);
         }
 
-        /* Animations */
+        /* --- АНІМАЦІЇ (Keyframes) --- */
+        @keyframes slideDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Responsive */
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(251, 191, 36, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0); }
+        }
+
+        @keyframes rotateBg {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Адаптивність */
         @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                gap: 1.5rem;
-            }
-
-            .hero-title {
-                font-size: 2rem;
-            }
-
-            .hero-subtitle {
-                font-size: 1rem;
-            }
-
-            .btn {
-                display: block;
-                margin: 0.5rem auto;
-                width: 80%;
-                max-width: 250px;
-            }
+            .hero h1 { font-size: 2.5rem; }
+            .nav-links { display: none; } /* Спрощення для мобільного */
+            .info-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <a href="#" class="logo">
-                    <div class="logo-text">
-                        <div class="logo-title">ХРЕБЕТ НАЦІЇ</div>
-                        <div class="logo-subtitle">Політична партія</div>
-                    </div>
-                </a>
-                <nav>
-                    <div class="nav-item">
-                        <a href="#" class="nav-link">Головна</a>
-                    </div>
-                    <div class="nav-item">
-                        <a href="#" class="nav-link">Партія <span class="dropdown-arrow">▼</span></a>
-                        <div class="dropdown-menu">
-                            <a href="pronas.html">Про партію</a>
-                            <a href="history.html">Історія</a>
-                            <a href="struktura.html">Структура</a>
-                            <a href="https://docs.google.com/document/d/1Z_ZQX6RcUzW5KoTGOgIgWIPpgB_pOoigJr-PRd0FoS0/edit?tab=t.0">Статут</a>
-                        </div>
-                    </div>
-                    <div class="nav-item">
-                        <a href="#" class="nav-link">Команда <span class="dropdown-arrow">▼</span></a>
-                        <div class="dropdown-menu">
-                            <a href="team.html">Керівництво</a>
-                        </div>
-                    </div>
-                    <div class="nav-item">
-                        <a href="#" class="nav-link">Програма <span class="dropdown-arrow">▼</span></a>
-                        <div class="dropdown-menu">
-                            <a href="polit.html">Політична програма</a>
-                        </div>
-                    </div>
-                    <div class="nav-item">
-                        <a href="news.html" class="nav-link">Для ЗМІ</a>
-                    </div>
-                    <div class="nav-item">
-                        <a href="kontakty.html" class="nav-link">Контакти</a>
-                    </div>
-                </nav>
-            </div>
+
+    <div class="disclaimer-bar">
+        ⚠ УВАГА! Цей сайт є частиною ігрового процесу (RP). Вся інформація не відповідає реальності та не має відношення до державних органів України.
+    </div>
+
+    <nav>
+        <div class="logo">ДСР <span style="color:#fff">|</span> НПУ</div>
+        <div class="nav-links">
+            <a href="#news">Головна</a>
+            <a href="#structure">Структура</a>
+            <a href="#wanted">Розшук</a>
+            <a href="#salary">Зарплата</a>
+            <a href="#recruitment">Вступ</a>
+            <a href="#contacts">Контакти</a>
         </div>
+    </nav>
+
+    <header class="hero">
+        <h1>ДЕПАРТАМЕНТ СТРАТЕГІЧНИХ РОЗСЛІДУВАНЬ</h1>
+        <p>Честь. Закон. Безкомпромісність. <br> Ми там, де інші безсилі.</p>
+        <a href="#" class="cta-btn">ПОДАТИ ЗАЯВУ / ЗВЕРНУТИСЬ</a>
     </header>
 
-    <section class="hero">
-        <div class="hero-content">
-            <h1 class="hero-title">Хребет Нації</h1>
-            <p class="hero-subtitle">Розбудова сильної, незалежної України. Нульова толерантність до корупції.</p>
-            <div>
-                <a href="https://docs.google.com/forms/d/1CFsj-jbgxLVhoOQo_Ba206hGsISZh2GzHQlNeWV3_9g/edit" class="btn btn-primary">Приєднатися</a>
-                <a href="https://docs.google.com/spreadsheets/d/1eM0yq5eT1D2dLPIfOU4ATdqpSFPpJLLJm_lRXaJttX8/edit?resourcekey=&gid=429667169#gid=429667169" class="btn btn-outline">Дізнатися відповідь</a>
+    <section id="news">
+        <h2 class="section-title">Останні Події</h2>
+        <div class="news-grid">
+            <div class="news-card scroll-anim">
+                <div class="news-date">19.11.2025</div>
+                <h3>Спецоперація "Чистий Лист"</h3>
+                <p>Успішно ліквідовано верхівку ОЗГ "OMEGA". Затримано лідера та 6 активних учасників. Вилучено рекордну кількість речових доказів.</p>
+            </div>
+            <div class="news-card scroll-anim">
+                <div class="news-date">18.11.2025</div>
+                <h3>Спільна нарада з КОРД</h3>
+                <p>Проведено тактичні навчання по штурму укріплених об'єктів. Відпрацьовано взаємодію між оперативниками та спецназом.</p>
+            </div>
+            <div class="news-card scroll-anim">
+                <div class="news-date">15.11.2025</div>
+                <h3>Оновлення автопарку</h3>
+                <p>ДСР отримав нові спеціалізовані транспортні засоби для проведення прихованого спостереження.</p>
             </div>
         </div>
     </section>
 
-    <section class="section">
-        <div class="container">
-            <h2 class="section-title">Останні новини</h2>
-            <div class="news-grid">
-                <article class="news-card">
-                    <img src="https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Новина 1" class="news-image">
-                    <div class="news-content">
-                        <div class="news-date">25 червня 2025</div>
-                        <h3 class="news-title">Кирило Громов представив програму реформ</h3>
-                        <p class="news-excerpt">Кандидат у Президенти України представив детальний план реформ для відновлення країни.</p>
-                        <a href="https://forum.ukraine-gta.com.ua/threads/%D0%9F%D0%B0%D1%80%D1%82%D1%96%D1%8F-%D0%9D%D0%B0%D1%86%D1%96%D0%BE%D0%BD%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%B3%D0%BE-%D0%A6%D0%B5%D0%BD%D1%82%D1%80%D1%83-%D0%A5%D0%A0%D0%95%D0%91%D0%95%D0%A2-%D0%9D%D0%90%D0%A6%D0%86%D0%87-%D0%9A%D0%B0%D0%BD%D0%B4%D0%B8%D0%B4%D0%B0%D1%82-%D0%9A%D0%B8%D1%80%D0%B8%D0%BB%D0%BE-%D0%93%D1%80%D0%BE%D0%BC%D0%BE%D0%B2.301101/" class="read-more">Читати далі</a>
-                    </div>
-                </article>
-                <article class="news-card">
-                    <img src="https://images.unsplash.com/photo-1521791055366-0d553872125f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Новина 2" class="news-image">
-                    <div class="news-content">
-                        <div class="news-date">24 червня 2025</div>
-                        <h3 class="news-title">Зустріч з Генералом СБУ</h3>
-                        <p class="news-excerpt">Канидадт у Президенти Кирило Громов вислухав проблеми і провозиції щодо законодавчої бази.</p>
-                        <a href="https://forum.ukraine-gta.com.ua/threads/%D0%9F%D0%B0%D1%80%D1%82%D1%96%D1%8F-%D0%9D%D0%B0%D1%86%D1%96%D0%BE%D0%BD%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%B3%D0%BE-%D0%A6%D0%B5%D0%BD%D1%82%D1%80%D1%83-%D0%A5%D0%A0%D0%95%D0%91%D0%95%D0%A2-%D0%9D%D0%90%D0%A6%D0%86%D0%87-%D0%9A%D0%B0%D0%BD%D0%B4%D0%B8%D0%B4%D0%B0%D1%82-%D0%9A%D0%B8%D1%80%D0%B8%D0%BB%D0%BE-%D0%93%D1%80%D0%BE%D0%BC%D0%BE%D0%B2.301101/" class="read-more">Читати далі</a>
-                    </div>
-                </article>
-                <article class="news-card">
-                    <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Новина 3" class="news-image">
-                    <div class="news-content">
-                        <div class="news-date">23 червня 2025</div>
-                        <h3 class="news-title">Створення партії</h3>
-                        <p class="news-excerpt">23 червня була створена партія "Хребет нації".</p>
-                        <a href="https://forum.ukraine-gta.com.ua/threads/%D0%9F%D0%B0%D1%80%D1%82%D1%96%D1%8F-%D0%9D%D0%B0%D1%86%D1%96%D0%BE%D0%BD%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%B3%D0%BE-%D0%A6%D0%B5%D0%BD%D1%82%D1%80%D1%83-%D0%A5%D0%A0%D0%95%D0%91%D0%95%D0%A2-%D0%9D%D0%90%D0%A6%D0%86%D0%87-%D0%9A%D0%B0%D0%BD%D0%B4%D0%B8%D0%B4%D0%B0%D1%82-%D0%9A%D0%B8%D1%80%D0%B8%D0%BB%D0%BE-%D0%93%D1%80%D0%BE%D0%BC%D0%BE%D0%B2.301101/" class="read-more">Читати далі</a>
-                    </div>
-                </article>
+    <section id="structure">
+        <h2 class="section-title">Структура ДСР</h2>
+        <div class="info-grid">
+            <div class="info-text scroll-anim">
+                <h3>Ієрархія підрозділу</h3>
+                <p>Наша структура побудована для максимальної ефективності та секретності.</p>
+                <br>
+                <ul>
+                    <li><strong>Керівництво ДСР:</strong> Стратегічне планування.</li>
+                    <li><strong>Слідчий відділ:</strong> Процесуальне оформлення злочинів ОЗГ.</li>
+                    <li><strong>Оперативний відділ:</strong> Розвідка, агентура, НСРД.</li>
+                    <li><strong>Академія:</strong> Підготовка нових кадрів.</li>
+                </ul>
+            </div>
+            <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 10px; text-align: center;">
+                <h4 style="color: var(--accent-blue);">Всього особового складу:</h4>
+                <h2 style="font-size: 4rem; color: #fff;">25</h2>
+                <p>Елітних фахівців</p>
             </div>
         </div>
     </section>
 
-    <section class="section" style="background-color: var(--light);">
-        <div class="container">
-            <h2 class="section-title">Керівництво партії</h2>
-            <div class="team-grid">
-                <div class="team-card">
-                    <h3 class="team-name">Кирило Громов</h3>
-                    <p class="team-position">Кандидат у Президенти України</p>
-                    <p class="team-contact">Telegram: @brobrixq</p>
-                    <p class="team-contact">Discord: brobrixq</p>
-                </div>
-                <div class="team-card">
-                    <h3 class="team-name">Бодя Громов</h3>
-                    <p class="team-position">Кандидат у Прем'єр-Міністри</p>
-                    <p class="team-contact">Telegram: @fauniy_hlop</p>
-                </div>
-                <div class="team-card">
-                    <h3 class="team-name">Саня Житомирський</h3>
-                    <p class="team-position">Куратор партії</p>
-                    <p class="team-contact">Telegram: @Sanchas9</p>
-                </div>
-                <div class="team-card">
-                    <h3 class="team-name">Сергій Житомирський</h3>
-                    <p class="team-position">Член партії</p>
-                </div>
+    <section id="wanted">
+        <h2 class="section-title" style="color: #ef4444;">УВАГА: РОЗШУК</h2>
+        <div class="wanted-container">
+            <div class="wanted-card scroll-anim">
+                <img src="https://via.placeholder.com/200?text=WANTED" alt="Criminal">
+                <h3>Невідома Особа</h3>
+                <p>ОЗГ "Cartel"</p>
+                <p style="color: gold; font-weight: bold;">Винагорода: $$$</p>
+            </div>
+            <div class="wanted-card scroll-anim">
+                <img src="https://via.placeholder.com/200?text=WANTED" alt="Criminal">
+                <h3>Андрій "Хімік"</h3>
+                <p>Наркоторгівля</p>
+                <p style="color: gold; font-weight: bold;">Винагорода: $$$</p>
             </div>
         </div>
     </section>
 
-    <section class="join-section">
-        <div class="container">
-            <h2 class="join-title">Приєднуйся до нас!</h2>
-            <p class="join-text">Стань частиною змін у нашій країні. Заповни заявку та пройди співбесіду, щоб стати членом партії "Хребет Нації".</p>
-            <a href="https://docs.google.com/forms/d/1CFsj-jbgxLVhoOQo_Ba206hGsISZh2GzHQlNeWV3_9g/edit" class="btn btn-primary">Подати заявку</a>
+    <section id="recruitment" style="background: linear-gradient(45deg, #0f172a, #1e293b);">
+        <h2 class="section-title">Кар'єра в ДСР</h2>
+        <div class="info-grid">
+            <div class="scroll-anim">
+                <h3>Як до нас потрапити?</h3>
+                <p>Ми не беремо всіх. Ми шукаємо найкращих.</p>
+                <br>
+                <ul>
+                    <li>Звання в НПУ: не нижче <strong>Сержанта (3)</strong>.</li>
+                    <li>Бездоганне знання КПК та ЗУ про Нацполіцію.</li>
+                    <li>Стресостійкість та адекватність.</li>
+                    <li>Пройти співбесіду в Discord.</li>
+                </ul>
+                <br>
+                <a href="#" class="cta-btn" style="font-size: 0.9rem; padding: 10px 20px;">ЗАПОВНИТИ АНКЕТУ КАНДИДАТА</a>
+            </div>
+            <div class="scroll-anim">
+                <h3>Заробітна Плата</h3>
+                <ul>
+                    <li>Стажер: від 20 000 грн</li>
+                    <li>Оперуповноважений: від 35 000 грн + премії за розкриття.</li>
+                    <li>Слідчий: від 40 000 грн.</li>
+                    <li>Керівництво: Визначається Генералом.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacts">
+        <h2 class="section-title">Контакти</h2>
+        <div style="text-align: center; font-size: 1.2rem;">
+            <p>📍 Головний офіс: м. Харків, вул. Шевченка, 23 (Секретний об'єкт)</p>
+            <br>
+            <p>📞 Спецлінія: <strong>102 (Код: ДСР)</strong></p>
+            <br>
+            <p>📧 Електронна пошта (RP): dsr_report@npu.gov.ua</p>
+            <br>
+            <p>💬 Telegram HR: <strong>@gromov_ug</strong></p>
         </div>
     </section>
 
     <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Партія</h3>
-                    <ul class="footer-links">
-                        <li class="footer-link"><a href="#">Про нас</a></li>
-                        <li class="footer-link"><a href="#">Програма</a></li>
-                        <li class="footer-link"><a href="#">Структура</a></li>
-                        <li class="footer-link"><a href="#">Документи</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Команда</h3>
-                    <ul class="footer-links">
-                        <li class="footer-link"><a href="#">Керівництво</a></li>
-                        <li class="footer-link"><a href="#">Члени партії</a></li>
-                        <li class="footer-link"><a href="#">Регіональні осередки</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Приєднатися</h3>
-                    <ul class="footer-links">
-                        <li class="footer-link"><a href="#">Умови вступу</a></li>
-                        <li class="footer-link"><a href="#">Подати заявку</a></li>
-                        <li class="footer-link"><a href="#">Волонтерство</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Контакти</h3>
-                    <ul class="footer-links">
-                        <li class="footer-link"><a href="https://t.me/party_backbone_of_the_nation">Telegram</a></li>
-                        <li class="footer-link"><a href="#">Email</a></li>
-                        <li class="footer-link"><a href="#">Офіс партії</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>© 2025 Політична партія "Хребет Нації" | UKRAINE GTA 04. Всі права захищені.</p>
-            </div>
-        </div>
+        <p>© 2025 Департамент Стратегічних Розслідувань. Всі права захищено.</p>
+        <p style="font-size: 0.7rem; margin-top: 10px; color: #475569;">
+            This is a roleplay website for a game server. Not affiliated with real law enforcement.
+        </p>
     </footer>
 
     <script>
-        // Анімації при скролі
-        document.addEventListener('DOMContentLoaded', function() {
-            const animateOnScroll = (elements) => {
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.style.opacity = '1';
-                            entry.target.style.transform = 'translateY(0)';
-                        }
-                    });
-                }, { threshold: 0.1 });
+        // Скрипт для анімації появи елементів при скролі
+        const observerOptions = {
+            threshold: 0.1
+        };
 
-                elements.forEach(element => {
-                    observer.observe(element);
-                });
-            };
-
-            // Анімуємо картки новин та команди
-            animateOnScroll(document.querySelectorAll('.news-card'));
-            animateOnScroll(document.querySelectorAll('.team-card'));
-
-            // Плавний скрол для навігації
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth'
-                        });
-                    }
-                });
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
             });
+        }, observerOptions);
 
-            // Закриття випадаючих меню при кліку поза ними
-            document.addEventListener('click', function(e) {
-                const dropdowns = document.querySelectorAll('.dropdown-menu');
-                dropdowns.forEach(dropdown => {
-                    if (!dropdown.parentElement.contains(e.target)) {
-                        dropdown.style.opacity = '0';
-                        dropdown.style.visibility = 'hidden';
-                        dropdown.style.transform = 'translateY(10px)';
-                    }
-                });
-            });
+        document.querySelectorAll('.scroll-anim').forEach(el => {
+            observer.observe(el);
         });
     </script>
 </body>
